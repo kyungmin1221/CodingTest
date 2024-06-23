@@ -1,2 +1,2 @@
 # CodingTest_PY
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+백준허브를 활용한 코딩테스트 풀이 - Python
