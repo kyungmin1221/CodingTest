@@ -1,19 +1,25 @@
 def solution(n, lost, reserve):
-    # 정렬
-    lost.sort()
-    reserve.sort()
-	
-    # lost, reserve에 공통으로 있는 요소 제거
-    for i in reserve[:]:
-        if i in lost:
-            reserve.remove(i)
-            lost.remove(i)
-	
-    # 체육복 빌려주기(나의 앞 번호부터 확인)
+    cloth = [1] * (n + 1)  # 모든 학생이 기본적으로 체육복을 한 벌씩 가지고 있다고 가정
+
     for i in reserve:
-        if i-1 in lost:
-            lost.remove(i-1)
-        elif i+1 in lost:
-            lost.remove(i+1)
-    
-    return n-len(lost)
+        cloth[i] += 1
+    for i in lost:
+        cloth[i] -= 1
+
+    for i in range(1, n + 1):
+        if cloth[i] == 0:
+            if i > 1 and cloth[i - 1] > 1:
+                cloth[i] += 1
+                cloth[i - 1] -= 1
+            elif i < n and cloth[i + 1] > 1:
+                cloth[i] += 1
+                cloth[i + 1] -= 1
+
+    count = sum(1 for i in range(1, n + 1) if cloth[i] > 0)
+    return count
+
+n = 3
+lost = [3]
+reserve = [1]
+
+print(solution(n, lost, reserve))  # 예상 출력: 3
