@@ -1,0 +1,20 @@
+-- 식품 아이디, 식품이름, 총매출 조회
+-- 생산일자가 2022-05 인것 
+-- 총 매출 기준 내림차순 정렬 
+-- 총 매출 같다면 식품 아이디 기준 오름차순 
+SELECT  
+    FP.PRODUCT_ID,
+    FP.PRODUCT_NAME, 
+    SUM(FP.PRICE * FO.AMOUNT) AS TOTAL_SALES
+FROM FOOD_PRODUCT FP 
+INNER JOIN FOOD_ORDER FO 
+    ON FP.PRODUCT_ID = FO.PRODUCT_ID 
+WHERE 1=1
+    AND FO.PRODUCE_DATE LIKE '2022-05%'
+GROUP BY
+    FP.PRODUCT_ID
+ORDER BY 
+    TOTAL_SALES DESC ,
+    FP.PRODUCT_ID ASC
+
+     
